@@ -1,0 +1,4 @@
+data/bac_train_401to800.fasta filter=lfs diff=lfs merge=lfs -text
+data/bac_train_801to1200.fasta filter=lfs diff=lfs merge=lfs -text
+data/phage_train_401to800.fasta filter=lfs diff=lfs merge=lfs -text
+data/phage_train_801to1200.fasta filter=lfs diff=lfs merge=lfs -text
