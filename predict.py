@@ -2,7 +2,7 @@ import numpy as np
 import keras
 from Bio import SeqIO
 
-file_path = './data/rumen_phage.fasta'
+file_path = snakemake.input['contigs']
 
 def read_fasta(fasta_path):
     fasta = SeqIO.parse(fasta_path, "fasta")
