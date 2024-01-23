@@ -3,6 +3,7 @@ import keras
 from Bio import SeqIO
 
 file_path = snakemake.input['contigs']
+prediction_path = snakemake.input['prediction']
 
 def read_fasta(fasta_path):
     fasta = SeqIO.parse(fasta_path, "fasta")
@@ -99,7 +100,7 @@ for i in range(len(X_test)):
     y_pred.append(result)
 
 fasta = SeqIO.parse(file_path, "fasta")
-seqfile = open('output.txt', "w")
+seqfile = open(prediction_path, "w")
 seqfile.write('name' + '\t' + 'length' + '\t' + 'score' + '\n')
 for idx, entry in enumerate(fasta, start=0):
     seqfile.write(str(entry.id) + '\t' + str(len(entry)) + '\t' + str(y_pred[idx]) + '\n')
