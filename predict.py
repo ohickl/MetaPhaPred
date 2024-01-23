@@ -4,7 +4,7 @@ import keras
 from Bio import SeqIO
 
 file_path = snakemake.input['contigs']
-prediction_path = snakemake.input['prediction']
+prediction_path = snakemake.output['prediction']
 log_path = snakemake.log[0]
 
 def read_fasta(fasta_path):
