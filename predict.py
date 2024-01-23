@@ -1,9 +1,11 @@
+import logging
 import numpy as np
 import keras
 from Bio import SeqIO
 
 file_path = snakemake.input['contigs']
 prediction_path = snakemake.input['prediction']
+log_path = snakemake.log[0]
 
 def read_fasta(fasta_path):
     fasta = SeqIO.parse(fasta_path, "fasta")
@@ -99,9 +101,16 @@ for i in range(len(X_test)):
     result = np.sum(np.array(result_pre) / a_all)
     y_pred.append(result)
 
+# Setting up logging
+logging.basicConfig(filename=log_path, level=logging.INFO)
+
+logging.info("Starting MetaPhaPred.")
+
 fasta = SeqIO.parse(file_path, "fasta")
 seqfile = open(prediction_path, "w")
 seqfile.write('name' + '\t' + 'length' + '\t' + 'score' + '\n')
 for idx, entry in enumerate(fasta, start=0):
     seqfile.write(str(entry.id) + '\t' + str(len(entry)) + '\t' + str(y_pred[idx]) + '\n')
 seqfile.close()
+
+logging.info("MetaPhaPred finished successfully.")
